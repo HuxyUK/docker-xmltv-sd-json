@@ -1,4 +1,16 @@
 #!/bin/bash
+# Installing TV Grabber Script
+echo "Downloading newest JSON script."
+wget https://raw.githubusercontent.com/kgroeneveld/tv_grab_sd_json/master/tv_grab_sd_json -O /tmp/tv_grab_sd_json
+rc=$?;
+if [ $rc != 0 ]; then
+  echo "Grabber failed to download. Aborting download..."
+exit $rc;
+fi
+mv /tmp/tv_grab_sd_json /usr/local/bin/tv_grab_sd_json
+chmod +x /usr/local/bin/tv_grab_sd_json
+echo ".. Done"
+
 CRONTAB="/config/cronjobs.txt"
 source /usr/local/bin/grabber 1
 
