@@ -6,7 +6,7 @@ A Docker image with a JSON Schedules Direct enabled script, allowing access to a
 
 #Supported tags and respective Dockerfile links
 
-* [Jessie](https://github.com/iuuuuan/xmltv/blob/master/Dockerfile)
+* [Jessie](https://github.com/HuxyUK/docker-xmltv-sd-json/blob/master/Dockerfile)
 
 
 #What is XMLTV?
