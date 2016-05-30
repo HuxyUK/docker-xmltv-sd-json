@@ -16,7 +16,7 @@ function setEnv() {
       echo "Using default number of days (1) for scan. This can be overriden with a STARTUPDAYS variable."
       DAYS=1
 	else
-	  DAYS=STARTUPDAYS
+	  DAYS=$STARTUPDAYS
 	fi
   else
     if [ -z "$DAYS" ]; then
