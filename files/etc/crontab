@@ -1,0 +1,2 @@
+30 */12 * * * /usr/local/bin/grabber >> /var/log/cron.log 2>&1
+#
