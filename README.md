@@ -1,5 +1,7 @@
 docker-xmltv-sd-json
 ======
+ [![Docker Hub; huxy/xmltv-sd-json](https://img.shields.io/badge/dockerhub-xmltv--sd--json-blue.svg)](https://registry.hub.docker.com/h/huxy/xmltv-sd-json)
+
 A Docker image with a JSON Schedules Direct enabled script, allowing access to all regions.
 
 #Supported tags and respective Dockerfile links
