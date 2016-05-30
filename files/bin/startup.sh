@@ -11,10 +11,14 @@ mv /tmp/tv_grab_sd_json /usr/local/bin/tv_grab_sd_json
 chmod +x /usr/local/bin/tv_grab_sd_json
 echo ".. Done"
 
-CRONTAB="/config/cronjobs.txt"
+## update environment for cron
+env > /etc/environment
+
+## run startup grab
 source /usr/local/bin/grabber 1
 
 ## importing custom cron tab if file exists
+CRONTAB="/config/cronjobs.txt"
 echo "Checking for crontab"
 if [ -s $CRONTAB ]; then
   echo "Located custom crontab..."
@@ -39,9 +43,6 @@ EOF
   crontab ${CRONTAB}
   echo "Done"
 fi
-
-## update environment for cron jobs
-env >> /etc/environment
 
 ## all done
 echo "********************"
