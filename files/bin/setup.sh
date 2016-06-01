@@ -15,7 +15,7 @@ echo ".. Done"
 
 # Install XMLTV
 echo "3. Installing XMLTV..."
-apt-get update && apt-get install --no-install-recommends -y xmltv wget
+apt-get update && apt-get install --no-install-recommends -y xmltv wget socat
 echo ".. Done"
 
 # Installing TV Grabber Script
@@ -31,7 +31,7 @@ echo ".. Done"
 
 # Creating XMLTV symbolic link
 echo "5. Creating XMLTV symbolic link"
-ln -s /config /root/.xmlt
+ln -s /config /root/.xmltv
 echo ".. Done"
 
 # Clean up

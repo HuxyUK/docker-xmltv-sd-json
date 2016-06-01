@@ -43,6 +43,19 @@ function setEnv() {
     OFFSET="0"
   fi
 
+  ## BINARY PATH TO USE
+  if [ ! -f "/usr/local/bin/${GRABBER}" ]; then
+    echo "Looking in /usr/bin for ${GRABBER}"
+    if [ -f "/usr/bin/${GRABBER}" ]; then
+      BINPATH="/usr/bin"
+    else
+      echo "${GRABBER} not found. Exiting."
+      exit 1;
+    fi
+  else
+    BINPATH="/usr/local/bin"
+  fi
+
   TMPFILE="/tmp/${GRABBER}.xml"
 } #END
 
@@ -54,18 +67,15 @@ function startGrab(){
   0)  echo "****************"
       echo "* RUNNING GRAB *"
       echo "****************"
-      if [ ! -f "/usr/local/bin/${GRABBER}" ]; then
-        echo "Looking in /usr/bin for ${GRABBER}"
-        if [ -f "/usr/bin/${GRABBER}" ]; then
-          echo "/usr/bin/${GRABBER} --days ${DAYS} --output ${FILENAME} --offset ${OFFSET}"
-          /usr/bin/${GRABBER} --days ${DAYS} --output ${TMPFILE} --offset ${OFFSET}
-        else
-          echo "${GRABBER} not found. Exiting."
-          exit 1;
-        fi
+
+      ## SOCKETS
+      if [ -S "/data/${FILENAME}" ]; then
+        echo "Output file is a socket; using socat"
+        echo "${BINPATH}/${GRABBER} --days ${DAYS} --offset ${OFFSET} | socat - UNIX-CONNECT:/data/${FILENAME}"
+	${BINPATH}/${GRABBER} --days ${DAYS} --offset ${OFFSET} | socat - UNIX-CONNECT:/data/${FILENAME}
       else
-        echo "/usr/local/bin/${GRABBER} --days ${DAYS} --output ${FILENAME} --offset ${OFFSET}"
-        /usr/local/bin/${GRABBER} --days ${DAYS} --output ${TMPFILE} --offset ${OFFSET}
+	echo "${BINPATH}/${GRABBER} --days ${DAYS} --output ${FILENAME} --offset ${OFFSET}"
+        ${BINPATH}/${GRABBER} --days ${DAYS} --output ${TMPFILE} --offset ${OFFSET}
       fi
       ;;
   1)  echo "Grabber already running"
@@ -81,8 +91,10 @@ function startGrab(){
 
 #FIX TO STOP DATA LOSS
 function moveTmp(){
-  echo "Moving tmp file to /data/${FILENAME}"
-  mv -f ${TMPFILE} /data/${FILENAME}
+  if [ -s "${TMPFILE}" ]; then
+    echo "Moving tmp file to /data/${FILENAME}"
+    mv -f ${TMPFILE} /data/${FILENAME}
+  fi
 } #END
 
 #PRINTS SCRIPT END
