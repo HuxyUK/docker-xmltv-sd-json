@@ -29,7 +29,8 @@ XMLTV utilities are provided courtesy of the Debian repository. At the time of w
 3. Grabber to use can be specified with GRABBER environment variable. 
 4. Customisable cron job support.
 5. Logging support.
-5. Plus others, that I can't remember. 
+6. Unix socket support. If the filename is a socket, socat will be used to pipe the grabber's output.
+7. ...
 
 #Grabbers
 Image contains the following TV grabbers:
