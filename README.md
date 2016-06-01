@@ -21,7 +21,7 @@ XMLTV utilities are provided courtesy of the Debian repository. At the time of w
 
 #Mounts
     /config : This is where XMLTV will store its cache and configuration.
-    /data   : This is the output directory for the EPG data that has been scrapped.
+    /data   : This is the output directory for the EPG data that has been scraped.
     
 #Features
 1. Auto runs grab on startup. Specify number of days using STARTUPDAYS environment variable.
