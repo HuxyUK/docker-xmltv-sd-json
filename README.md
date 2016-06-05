@@ -84,7 +84,7 @@ SHELL=/bin/bash
 #How to use this image
 
 ##Configure grabber
-    sudo docker run -ti --rm huxy/xmltv-sd-json /usr/local/bin/tv_grab_sd_json --configure
+    sudo docker run -ti -v 'your config dir':/config --rm huxy/xmltv-sd-json /usr/local/bin/tv_grab_sd_json --configure
   
 ##Launch Docker container
     sudo docker run -ti --rm huxy/xmltv-sd-json 
