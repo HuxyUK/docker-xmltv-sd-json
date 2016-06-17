@@ -15,7 +15,7 @@ echo ".. Done"
 
 # Install XMLTV
 echo "3. Installing XMLTV..."
-apt-get update && apt-get install --no-install-recommends -y xmltv wget socat
+apt-get update && apt-get install --no-install-recommends -y xmltv wget socat libdatetime-format-dateparse-perl
 echo ".. Done"
 
 # Installing TV Grabber Script
