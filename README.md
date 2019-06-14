@@ -4,26 +4,26 @@ docker-xmltv-sd-json
 
 A Docker image with a JSON Schedules Direct enabled script, allowing access to all regions.
 
-#Supported tags and respective Dockerfile links
+# Supported tags and respective Dockerfile links
 
 * [Jessie](https://github.com/HuxyUK/docker-xmltv-sd-json/blob/master/Dockerfile)
 
-
-#What is XMLTV?
+# What is XMLTV?
 
 XMLTV is a set of programs to process TV (tvguide) listings and manage your TV viewing, storing listings in an XML format. There are backends to download TV listings for several countries, filter programs and Perl libraries to process listings.
 
 For more information visit [XMLTV SourceForge page](http://sourceforge.net/projects/xmltv/).
 
-#Docker image information
+# Docker image information
 
 XMLTV utilities are provided courtesy of the Debian repository. At the time of writing **[0.5.63-2]** is the latest version included with Debian Jessie. The image will not work correctly unless the grabber being used is configured. This can be done via the command line or an existing config file dropped in to the config persistent mount point. 
 
-#Mounts
+# Mounts
     /config : This is where XMLTV will store its cache and configuration.
     /data   : This is the output directory for the EPG data that has been scraped.
     
-#Features
+# Features
+
 1. Auto runs grab on startup. Specify number of days using STARTUPDAYS environment variable.
 2. Days to grab can be configured with DAYS environment variable.
 3. Grabber to use can be specified with GRABBER environment variable. 
@@ -32,7 +32,8 @@ XMLTV utilities are provided courtesy of the Debian repository. At the time of w
 6. Unix socket support. If the filename is a socket, socat will be used to pipe the grabber's output.
 7. ...
 
-#Grabbers
+# Grabbers
+
 Image contains the following TV grabbers:
 
 | Grabber       				        | Region        													                              |
@@ -66,14 +67,17 @@ Image contains the following TV grabbers:
 | /usr/bin/tv_na_dd				      | North America (Schedules Direct)										                  |
 | /usr/local/bin/tv_grab_sd_json| Schedules Direct (JSON)												                        |
 
-#Cronjobs
+# Cronjobs
+
 On boot if no existing crontab is available, the image will create one for you. This can then be further customised by editing the crontabs.txt file stored in the config mount point. 
+
 ```shell
 30 */12 * * * /usr/local/bin/grabber >> /var/log/cron.log 2>&1
 #
 ```
 
 or expert configuration
+
 ```shell
 SHELL=/bin/bash
 15 */4 * * * /usr/local/bin/grabber >> /var/log/cron.log 2>&1
@@ -81,15 +85,25 @@ SHELL=/bin/bash
 55 */2 * * * DAYS=1 OFFSET='1' bash -c '/usr/local/bin/grabber >> /var/log/cron.log 2>&1'
 #
 ```
-#How to use this image
 
-##Configure grabber
-    sudo docker run -ti -v 'your config dir':/config --rm huxy/xmltv-sd-json /usr/local/bin/tv_grab_sd_json --configure
-  
-##Launch Docker container
-    sudo docker run -ti --rm huxy/xmltv-sd-json 
+# How to use this image
 
-##Base image for custom xmltv configuration
+## Configure grabber
+
+```shell
+sudo docker run -ti -v 'your config dir':/config --rm huxy/xmltv-sd-json /usr/local/bin/tv_grab_sd_json --configure
+```
+
+## Launch Docker container
+
+```shell
+sudo docker run -ti --rm huxy/xmltv-sd-json 
+```
+
+## Base image for custom xmltv configuration
+
 Create your own Dockerfile and use this image for base image
 
-    FROM huxy/xmltv-sd-json
+```shell
+FROM huxy/xmltv-sd-json
+```
